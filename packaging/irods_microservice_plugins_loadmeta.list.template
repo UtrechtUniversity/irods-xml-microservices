@@ -12,12 +12,11 @@
 %requires irods-runtime
 
 %if DEB
-%requires libc6
-%requires libcurl3
+%requires libxml2-dev
 %endif
 
 %if RPM
-%requires curl-devel
+%requires libxml2-devel
 %endif
 
 %if ARCH
