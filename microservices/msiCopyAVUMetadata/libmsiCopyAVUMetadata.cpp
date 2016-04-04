@@ -84,7 +84,7 @@ msiCopyAVUMetadata(msParam_t *inpParam1, msParam_t *inpParam2, msParam_t *outPar
 	return (rei->status);
 }
 irods::ms_table_entry * plugin_factory() {
-    irods::ms_table_entry* msvc = new irods::ms_table_entry(2);
+    irods::ms_table_entry* msvc = new irods::ms_table_entry(3);
     msvc->add_operation("msiCopyAVUMetadata","msiCopyAVUMetadata");
     return msvc;
 }
