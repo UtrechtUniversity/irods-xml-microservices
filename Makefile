@@ -3,10 +3,12 @@ msiLoadMetadataFromDataObj	= microservices/msiLoadMetadataFromDataObj
 msiLoadMetadataFromXml	= microservices/msiLoadMetadataFromXml
 msiSetDataType = microservices/msiSetDataType
 msiCopyAVUMetadata = microservices/msiCopyAVUMetadata
+msiStripAVUs = microservices/msiStripAVUs
+msiGetDataObjAIP = microservices/msiGetDataObjAIP
 
 MAKEFLAGS += --no-print-directory
 
-LIBS = $(MS_PLUGIN_CURL_CORE) $(msiLoadMetadataFromDataObj) $(msiLoadMetadataFromXml) $(msiSetDataType) $(msiCopyAVUMetadata)
+LIBS = $(MS_PLUGIN_CURL_CORE) $(msiLoadMetadataFromDataObj) $(msiLoadMetadataFromXml) $(msiSetDataType) $(msiCopyAVUMetadata) $(msiStripAVUs) $(msiGetDataObjAIP)
 
 .PHONY: all $(LIBS) clean
 all: $(LIBS)
@@ -28,4 +30,6 @@ clean:
 	@$(MAKE) -C $(msiLoadMetadataFromXml) clean;
 	@$(MAKE) -C $(msiSetDataType) clean;
 	@$(MAKE) -C $(msiCopyAVUMetadata) clean;
+	@$(MAKE) -C $(msiStripAVUs) clean;
+	@$(MAKE) -C $(msiGetDataObjAIP) clean;
 
