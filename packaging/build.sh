@@ -220,7 +220,10 @@ if [ "$DETECTEDOS" == "RedHatCompatible" ] ; then # CentOS and RHEL and Fedora
     epmvar="REDHAT"
     ostype=`awk '{print $1}' /etc/redhat-release`
     osversion=`awk '{print $3}' /etc/redhat-release`
-    if [ "$ostype" == "CentOS" -a "$osversion" \> "6" ]; then
+    if [ "$ostype" == "CentOS" -a "$osversion" \> "7" ]; then
+	    epmosversion="CENTOS7"
+	    SUFFIX="centos7"
+    elif [ "$ostype" == "CentOS" -a "$osversion" \> "6" ]; then
 epmosversion="CENTOS6"
         SUFFIX="centos6"
     else

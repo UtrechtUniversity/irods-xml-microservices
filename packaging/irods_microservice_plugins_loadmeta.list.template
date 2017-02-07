@@ -1,7 +1,7 @@
 # =-=-=-=-=-=-=-
 # EPM Variables
 # =-=-=-=-=-=-=-
-%product iRODS CURL Microservice Plugins
+%product iRODS 3.x Microservice Plugins forward ported to 4.x 
 %copyright 2014, The University of North Carolina at Chapel Hill
 %vendor Renaissance Computing Institute <info@irods-consortium.org>
 %license LICENSE
@@ -12,11 +12,11 @@
 %requires irods-runtime
 
 %if DEB
-%requires libxml2-dev
+%requires libxml2-dev libxslt1-dev
 %endif
 
 %if RPM
-%requires libxml2-devel
+%requires libxml2-devel libxslt-devel
 %endif
 
 %if ARCH
@@ -113,3 +113,4 @@ f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ mic
 f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiCopyAVUMetadata/*.so
 f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiStripAVUs/*.so
 f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiGetDataObjAIP/*.so
+f 644 $OS_IRODS_ACCT $OS_IRODS_ACCT ${IRODS_HOME_DIR}/plugins/microservices/ microservices/msiXsltApply/*.so
