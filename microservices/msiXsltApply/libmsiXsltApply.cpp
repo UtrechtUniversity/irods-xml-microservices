@@ -223,8 +223,12 @@ extern "C" {
 		/* And the magic happens */
 		res = xsltApplyStylesheet(style, doc, NULL);
 
-		/* Save result XML document to a string */
-		rei->status = xsltSaveResultToString((xmlChar**)&outStr, &outLen, res, style);
+		if (res == NULL) {
+			rei->status = XML_PARSING_ERR;
+		} else {
+			/* Save result XML document to a string */
+			rei->status = xsltSaveResultToString((xmlChar**)&outStr, &outLen, res, style);
+		}
 
 
 		/* cleanup of all xml parsing stuff */
@@ -239,15 +243,16 @@ extern "C" {
 
 		/************************************** WE'RE DONE **************************************/
 
+		if (rei->status != XML_PARSING_ERR) {
+			/* copy the result string into an output buffer */
+			mybuf = (bytesBuf_t *)malloc(sizeof(bytesBuf_t));
+			mybuf->buf = (void *)outStr;
+			mybuf->len = strlen(outStr);
 
-		/* copy the result string into an output buffer */
-		mybuf = (bytesBuf_t *)malloc(sizeof(bytesBuf_t));
-		mybuf->buf = (void *)outStr;
-		mybuf->len = strlen(outStr);
 
-
-		/* send results out to msParamOut */
-		fillBufLenInMsParam (msParamOut, mybuf->len, mybuf);
+			/* send results out to msParamOut */
+			fillBufLenInMsParam (msParamOut, mybuf->len, mybuf);
+		}
 
 		return (rei->status);
 	}
