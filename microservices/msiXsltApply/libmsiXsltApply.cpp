@@ -152,12 +152,9 @@ extern "C" {
 
 		rei->status = rsDataObjRead (rsComm, &openedDataObjInp, xsltBuf);
 		
-		/* Make sure that the result is null terminated */
-		if (strlen((char*)xsltBuf->buf) > (size_t)openedDataObjInp.len)
-		{
-			((char*)xsltBuf->buf)[openedDataObjInp.len-1]='\0';
-		}
+		/* Convert buffer to xmlChar (null-terminated) */
 
+		xmlChar* xsltXmlChar = xmlCharStrndup((char*)xsltBuf->buf, openedDataObjInp.len);		
 
 		/* Close XSLT file */
 		rei->status = rsDataObjClose (rsComm, &openedDataObjInp);
@@ -192,12 +189,8 @@ extern "C" {
 
 		rei->status = rsDataObjRead (rsComm, &openedDataObjInp, xmlBuf);
 
-		/* Make sure that the result is null terminated */
-		if (strlen((char*)xmlBuf->buf) > (size_t)openedDataObjInp.len)
-		{
-			((char*)xmlBuf->buf)[openedDataObjInp.len-1]='\0';
-		}
-
+		/* copy buffer into null terminated xmlChar */
+		xmlChar* xmlXmlChar = xmlCharStrndup((char*)xmlBuf->buf, openedDataObjInp.len);		
 
 		/* Close XML file */
 		rei->status = rsDataObjClose (rsComm, &openedDataObjInp);
@@ -214,11 +207,11 @@ extern "C" {
 
 
 		/* Parse xsltBuf.buf into an xmlDocPtr, and the xmlDocPtr into an xsltStylesheetPtr */
-		xslSheet = xmlParseDoc((xmlChar*)xsltBuf->buf);
+		xslSheet = xmlParseDoc(xsltXmlChar);
 		style = xsltParseStylesheetDoc(xslSheet);
 
 		/* Parse xmlBuf.buf into an xmlDocPtr */
-		doc = xmlParseDoc((xmlChar*)xmlBuf->buf);
+		doc = xmlParseDoc(xmlXmlChar);
 
 		/* And the magic happens */
 		res = xsltApplyStylesheet(style, doc, NULL);
