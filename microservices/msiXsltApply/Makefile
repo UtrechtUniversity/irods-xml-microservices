@@ -8,7 +8,7 @@ INC=-I/usr/include/irods/ -I/usr/include/irods/boost/ `xslt-config --cflags` -I$
 all: libmsiXsltApply 
 
 libmsiXsltApply:
-	${GCC} ${INC} -DRODS_SERVER -fPIC -shared -g -Wno-deprecated -Wno-write-strings -o $@.so $@.cpp `xslt-config --libs` /usr/lib/libirods_client.a
+	${GCC} ${INC} -DRODS_SERVER -fPIC -shared -g -Wno-deprecated -Wno-write-strings -o $@.so $@.cpp -lexslt `xslt-config --libs` /usr/lib/libirods_client.a
 	
 clean:
 	@rm -f ./*.so

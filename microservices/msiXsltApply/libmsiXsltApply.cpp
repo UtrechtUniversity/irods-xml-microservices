@@ -8,6 +8,8 @@
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
 #include <libxslt/xsltInternals.h>
+#include <libexslt/exslt.h>
+#include <libexslt/exsltconfig.h>
 #include <iostream>
 #include "apiHeaderAll.hpp"
 #include "msParam.hpp"
@@ -204,7 +206,8 @@ extern "C" {
 
 		xmlSubstituteEntitiesDefault(1);
 		xmlLoadExtDtdDefaultValue = 1;
-
+	
+		exsltRegisterAll();
 
 		/* Parse xsltBuf.buf into an xmlDocPtr, and the xmlDocPtr into an xsltStylesheetPtr */
 		xslSheet = xmlParseDoc(xsltXmlChar);
